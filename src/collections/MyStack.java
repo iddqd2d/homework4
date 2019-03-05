@@ -18,7 +18,7 @@ public class MyStack<T> {
     }
 
     public T pop() {
-        return (getSize() != 0) ? myArrayList.remove(getSize()-1) : null;
+        return (getSize() != 0) ? myArrayList.remove(getSize() - 1) : null;
     }
 
     public void clear() {

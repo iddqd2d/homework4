@@ -1,19 +1,19 @@
 package collections;
 
 public class MyLinkedList<T> extends MyAbstractList<T> {
-    private Node<T> first;
-    private Node<T> last;
+    private Node<T> head;
+    private Node<T> tail;
 
     private Node<T> node(int index) {
-        if (index < (getSize() / 2)) {
-            Node<T> x = first;
+        if (index < (size / 2)) {
+            Node<T> x = head;
             for (int i = 0; i < index; i++) {
                 x = x.getNext();
             }
             return x;
         } else {
-            Node<T> x = last;
-            for (int i = getSize() - 1; i > index; i--) {
+            Node<T> x = tail;
+            for (int i = size - 1; i > index; i--) {
                 x = x.getPrev();
             }
             return x;
@@ -22,19 +22,20 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
 
     @Override
     public T get(int index) {
-        return (check(index)) ? node(index).getItem() : null;
+        check(index);
+        return node(index).getItem();
     }
 
 
     @Override
     public MyLinkedList add(T t) {
-        Node<T> prevNode = last;
+        Node<T> prevNode = tail;
         Node<T> curNode = new Node<>(prevNode, t, null);
-        last = curNode;
+        tail = curNode;
         if (prevNode == null) {
-            first = curNode;
+            head = curNode;
         } else prevNode.setNext(curNode);
-        setSize(getSize() + 1);
+        size++;
         return this;
     }
 
@@ -43,35 +44,35 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
         Node<T> prev = node.getPrev();
 
         if (prev == null) {
-            first = next;
+            head = next;
         } else {
             prev.setNext(next);
             node.setPrev(null);
         }
 
         if (next == null) {
-            last = prev;
+            tail = prev;
         } else {
             next.setPrev(prev);
             node.setNext(null);
         }
 
         node.setItem(null);
-        setSize(getSize() - 1);
+        size--;
     }
 
 
     public int remove(Object o) {
         int quantity = 0;
         if (o == null) {
-            for (Node<T> x = first; x != null; x = x.getNext()) {
+            for (Node<T> x = head; x != null; x = x.getNext()) {
                 if (x.getItem() == null) {
                     cutNode(x);
                     quantity++;
                 }
             }
         } else {
-            for (Node<T> x = first; x != null; x = x.getNext()) {
+            for (Node<T> x = head; x != null; x = x.getNext()) {
                 if (o.equals(x.getItem())) {
                     cutNode(x);
                     quantity++;
@@ -83,31 +84,30 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
 
     @Override
     public T remove(int index) {
-        if (check(index)) {
-            T temp = node(index).getItem();
-            cutNode(node(index));
-            return temp;
-        } else return null;
+        check(index);
+        T temp = node(index).getItem();
+        cutNode(node(index));
+        return temp;
     }
 
     @Override
     public void clear() {
-        for (Node<T> x = first; x != null; ) {
+        for (Node<T> x = head; x != null; ) {
             Node<T> next = x.getNext();
             x.setItem(null);
             x.setNext(null);
             x.setPrev(null);
             x = next;
         }
-        first = last = null;
-        setSize(0);
+        head = tail = null;
+        size = 0;
     }
 
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer();
         int i = 0;
-        for (Node<T> x = first; x != null; x = x.getNext(), i++) {
+        for (Node<T> x = head; x != null; x = x.getNext(), i++) {
             str.append("[" + i + "] => " + x.getItem() + "\n");
         }
         return str.toString();
