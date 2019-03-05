@@ -16,7 +16,7 @@ public class Main {
 
         MyStack myStack = new MyStack();
         myStack.push(1).push(2).push(3);
-        System.out.println(myStack.pop());
+        System.out.println(myStack.peek());
         System.out.println(myStack);
     }
 }

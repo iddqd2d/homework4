@@ -7,6 +7,7 @@ public class MyArrayList<T> extends MyAbstractList<T> {
 
     private Object[] array;
     private static final int DEFAULT_CAPACITY = 10;
+    private static final Object[] EMPTY_ARRAY = {};
 
     public MyArrayList() {
         array = new Object[DEFAULT_CAPACITY];
@@ -16,7 +17,7 @@ public class MyArrayList<T> extends MyAbstractList<T> {
         if (initialCapacity > 0) {
             array = new Object[initialCapacity];
         } else {
-            array = new Object[0];
+            array = EMPTY_ARRAY;
         }
     }
 

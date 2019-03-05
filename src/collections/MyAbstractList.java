@@ -8,6 +8,8 @@ public abstract class MyAbstractList<T> implements MyList<T> {
     }
 
     protected void check(int i) {
-        if (i > size || i < 0) throw new MyIndexException(size);
+        if (i > size || i < 0) {
+            throw new MyIndexException(size);
+        }
     }
 }
