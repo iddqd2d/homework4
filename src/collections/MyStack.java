@@ -7,26 +7,25 @@ public class MyStack<T> {
         myArrayList = new MyArrayList<T>();
     }
 
+    public int getSize() {
+        return myArrayList.getSize();
+    }
+
     public MyStack push(T t) {
         myArrayList.add(t);
         return this;
     }
 
     public T peek() {
-        int size = myArrayList.getSize();
-        return (size != 0) ? myArrayList.get(size - 1) : null;
+        return (!myArrayList.isEmpty()) ? myArrayList.get(getSize() - 1) : null;
     }
 
     public T pop() {
-        return (getSize() != 0) ? myArrayList.remove(getSize() - 1) : null;
+        return (!myArrayList.isEmpty()) ? myArrayList.remove(getSize() - 1) : null;
     }
 
     public void clear() {
         myArrayList.clear();
-    }
-
-    public int getSize() {
-        return myArrayList.getSize();
     }
 
     public void remove(T t) {

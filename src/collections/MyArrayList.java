@@ -33,8 +33,7 @@ public class MyArrayList<T> extends MyAbstractList<T> {
     @Override
     public MyArrayList add(T t) {
         resizeArray();
-        array[size] = t;
-        size++;
+        array[size++] = t;
         return this;
     }
 
@@ -60,8 +59,7 @@ public class MyArrayList<T> extends MyAbstractList<T> {
             System.arraycopy(array, index + 1, array, index, lenghtMoved);
         }
 
-        array[size - 1] = null;
-        size--;
+        array[--size] = null;
         return temp;
     }
 
@@ -87,6 +85,10 @@ public class MyArrayList<T> extends MyAbstractList<T> {
             int oldCapacity = array.length;
             array = Arrays.copyOf(array, oldCapacity + 1 + (oldCapacity >> 1));
         }
+    }
+
+    public boolean isEmpty() {
+        return (size == 0);
     }
 
     @Override
