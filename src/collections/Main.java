@@ -1,8 +1,5 @@
 package collections;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 public class Main {
     public static void main(String[] args) {
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
@@ -19,6 +16,5 @@ public class Main {
         myStack.push(1).push(2).push(3);
         System.out.println(myStack.pop());
         System.out.println(myStack);
-
     }
 }

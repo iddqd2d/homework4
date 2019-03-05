@@ -8,8 +8,9 @@ public class MyArrayList<T> extends MyAbstractList<T> {
     private Object[] array;
     private static final int DEFAULT_CAPACITY = 10;
 
-    public Object[] getArray() {
-        return array;
+
+    public MyArrayList() {
+        array = new Object[DEFAULT_CAPACITY];
     }
 
     public MyArrayList(int initialCapacity) {
@@ -20,10 +21,9 @@ public class MyArrayList<T> extends MyAbstractList<T> {
         }
     }
 
-    public MyArrayList() {
-        array = new Object[DEFAULT_CAPACITY];
+    public Object[] getArray() {
+        return array;
     }
-
 
     @Override
     public T get(int index) {
@@ -34,7 +34,7 @@ public class MyArrayList<T> extends MyAbstractList<T> {
     public MyArrayList add(T t) {
         resizeArray();
         array[getSize()] = t;
-        icreaseSize();
+        setSize(getSize() + 1);
         return this;
     }
 
@@ -43,36 +43,36 @@ public class MyArrayList<T> extends MyAbstractList<T> {
         if (check(index)) {
             int lenghtMoved = getSize() - index;
             if (lenghtMoved > 0) {
-                System.arraycopy(array, index, array, index + 1,
-                        lenghtMoved);
+                System.arraycopy(array, index, array, index + 1, lenghtMoved);
                 array[index] = t;
             }
         }
-        icreaseSize();
+        setSize(getSize() + 1);
         return this;
     }
 
     @Override
-    public boolean remove(int index) {
+    public T remove(int index) {
         if (check(index)) {
+            T temp = (T) array[index];
+
             int lenghtMoved = getSize() - index - 1;
 
             if (lenghtMoved > 0) {
-                System.arraycopy(array, index + 1, array, index,
-                        lenghtMoved);
-                array[getSize() - 1] = null;
+                System.arraycopy(array, index + 1, array, index, lenghtMoved);
             }
-            decreaseSize();
-            return true;
+            array[getSize() - 1] = null;
+            setSize(getSize() - 1);
+            return temp;
         }
-        return false;
+        return null;
     }
 
     public void remove(T t) {
         for (int i = 0; i < getSize(); i++) {
             if (array[i].equals(t)) {
                 remove(i);
-                decreaseSize();
+                setSize(getSize() - 1);
             }
         }
     }
@@ -82,7 +82,7 @@ public class MyArrayList<T> extends MyAbstractList<T> {
         for (int i = 0; i < getSize(); i++) {
             array[i] = null;
         }
-        clearSize();
+        setSize(0);
     }
 
     private void resizeArray() {

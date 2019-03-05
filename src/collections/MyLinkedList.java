@@ -8,13 +8,13 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
         if (index < (getSize() / 2)) {
             Node<T> x = first;
             for (int i = 0; i < index; i++) {
-                x = x.next;
+                x = x.getNext();
             }
             return x;
         } else {
             Node<T> x = last;
             for (int i = getSize() - 1; i > index; i--) {
-                x = x.prev;
+                x = x.getPrev();
             }
             return x;
         }
@@ -22,7 +22,7 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
 
     @Override
     public T get(int index) {
-        return (check(index)) ? node(index).item : null;
+        return (check(index)) ? node(index).getItem() : null;
     }
 
 
@@ -33,46 +33,46 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
         last = curNode;
         if (prevNode == null) {
             first = curNode;
-        } else prevNode.next = curNode;
-        icreaseSize();
+        } else prevNode.setNext(curNode);
+        setSize(getSize() + 1);
         return this;
     }
 
     private void cutNode(Node<T> node) {
-        Node<T> next = node.next;
-        Node<T> prev = node.prev;
+        Node<T> next = node.getNext();
+        Node<T> prev = node.getPrev();
 
         if (prev == null) {
             first = next;
         } else {
-            prev.next = next;
-            node.prev = null;
+            prev.setNext(next);
+            node.setPrev(null);
         }
 
         if (next == null) {
             last = prev;
         } else {
-            next.prev = prev;
-            node.next = null;
+            next.setPrev(prev);
+            node.setNext(null);
         }
 
-        node.item = null;
-        decreaseSize();
+        node.setItem(null);
+        setSize(getSize() - 1);
     }
 
 
     public int remove(Object o) {
         int quantity = 0;
         if (o == null) {
-            for (Node<T> x = first; x != null; x = x.next) {
-                if (x.item == null) {
+            for (Node<T> x = first; x != null; x = x.getNext()) {
+                if (x.getItem() == null) {
                     cutNode(x);
                     quantity++;
                 }
             }
         } else {
-            for (Node<T> x = first; x != null; x = x.next) {
-                if (o.equals(x.item)) {
+            for (Node<T> x = first; x != null; x = x.getNext()) {
+                if (o.equals(x.getItem())) {
                     cutNode(x);
                     quantity++;
                 }
@@ -82,32 +82,33 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
     }
 
     @Override
-    public boolean remove(int index) {
+    public T remove(int index) {
         if (check(index)) {
+            T temp = node(index).getItem();
             cutNode(node(index));
-            return true;
-        } else return false;
+            return temp;
+        } else return null;
     }
 
     @Override
     public void clear() {
         for (Node<T> x = first; x != null; ) {
-            Node<T> next = x.next;
-            x.item = null;
-            x.next = null;
-            x.prev = null;
+            Node<T> next = x.getNext();
+            x.setItem(null);
+            x.setNext(null);
+            x.setPrev(null);
             x = next;
         }
         first = last = null;
-        clearSize();
+        setSize(0);
     }
 
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer();
         int i = 0;
-        for (Node<T> x = first; x != null; x = x.next, i++) {
-            str.append("[" + i + "] => " + x.item + "\n");
+        for (Node<T> x = first; x != null; x = x.getNext(), i++) {
+            str.append("[" + i + "] => " + x.getItem() + "\n");
         }
         return str.toString();
     }

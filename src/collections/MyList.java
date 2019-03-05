@@ -5,7 +5,7 @@ public interface MyList<T> {
 
     MyList add(T t);
 
-    boolean remove(int index);
+    T remove(int index);
 
     void clear();
 
