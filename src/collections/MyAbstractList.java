@@ -8,7 +8,7 @@ public abstract class MyAbstractList<T> implements MyList<T> {
     }
 
     public void setSize(int size) {
-        this.size = size;
+        this.size = (size > 0)? size : 0;
     }
 
     protected boolean check(int i) {

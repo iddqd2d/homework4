@@ -5,6 +5,8 @@ public class Main {
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
         myArrayList.add(1).add(2).add(3).add(4).add(5);
         myArrayList.remove(3);
+        myArrayList.setSize(-10);
+        myArrayList.add(2);
         System.out.println(myArrayList);
 
         MyLinkedList<String> myLinkedList = new MyLinkedList<>();
