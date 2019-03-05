@@ -8,7 +8,6 @@ public class Main {
         myArrayList.add(1).add(2).add(3).add(4).add(5);
         System.out.println(myArrayList);
 
-
         MyLinkedList<String> myLinkedList = new MyLinkedList<>();
         myLinkedList.add("a").add("b").add("c").add("d");
         System.out.println(myLinkedList);

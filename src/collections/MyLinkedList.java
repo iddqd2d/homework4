@@ -26,7 +26,6 @@ public class MyLinkedList<T> extends MyAbstractList<T> {
         return node(index).getItem();
     }
 
-
     @Override
     public MyLinkedList add(T t) {
         Node<T> prevNode = tail;

@@ -8,7 +8,6 @@ public class MyArrayList<T> extends MyAbstractList<T> {
     private Object[] array;
     private static final int DEFAULT_CAPACITY = 10;
 
-
     public MyArrayList() {
         array = new Object[DEFAULT_CAPACITY];
     }
